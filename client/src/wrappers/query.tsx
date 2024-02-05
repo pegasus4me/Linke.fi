@@ -11,8 +11,10 @@ export default function Query({
 }): JSX.Element {
   return (
     <QueryClientProvider client={queryClient}>
-      <ConnectKitProvider theme="retro"
-       customTheme={{
+      <ConnectKitProvider 
+      
+      theme="retro"
+      customTheme={{
         "--ck-overlay-background": "#2832f74f",
         "--ck-overlay-backdrop-filter":"blur(0px)",
         "--ck-body-background":"#c9ccff",
