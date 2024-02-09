@@ -4,6 +4,7 @@ import { ConnectKitButton } from "connectkit";
 import Linki from "../assets/Linke.fi.svg";
 import Image from "next/image";
 import Link from "next/link";
+
 export default function Header() {
   return (
     <nav className="mt-5 max-w-[50%] m-auto">

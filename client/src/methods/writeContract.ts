@@ -9,8 +9,14 @@ const contractAddress: Hash = "0x58Fa02924312CFd1300714daEc48D4f05Ef7f2e1";
 
 export class WriteContract implements IWriteContract {
     // # apporouve contract spender 
-    async approuve(assets :bigint, spender : Hash) : Promise<void> {
+    async approuve(assets :bigint, spender : Hash, Current_balance : bigint) : Promise<void> {
         try {
+        
+            // checkpoint pour s'assurer que l'user n'essaye pas de stake plus que ça currentBalance
+            if(assets > Current_balance) {
+            throw new Error("you cant stake more than your balance")
+            }
+            
             writeContract(config,{
                     abi,
                     address : contractAddress,
@@ -29,8 +35,14 @@ export class WriteContract implements IWriteContract {
 
     // # deposit underlined asset into the contract and get vShares at 1:1 ratio
 
-    async deposit(assets: bigint, receiver:Hash ): Promise<number | void> {
+    async deposit(assets: bigint, receiver:Hash, Current_balance : bigint ): Promise<number | void> {
+        
+        if(assets > Current_balance) {
+            throw new Error("you cant stake more than your balance")
+        }
+        
         try {
+
             writeContract(config,{
                     abi,
                     address : contractAddress,

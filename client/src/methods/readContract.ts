@@ -26,7 +26,7 @@ export class ReadContract implements IReadContract {
         }
     }
 
-    async _previewDeposit(assets : bigint): Promise<number | void> {
+    async _previewDeposit(assets : bigint): Promise<bigint | void> {
          try {
            readContract(config,{
             abi,
@@ -42,7 +42,7 @@ export class ReadContract implements IReadContract {
             throw new Error(message);
         }
     }
-    async _previewWithdraw(shares: bigint): Promise<number | void> {
+    async _previewWithdraw(shares: bigint): Promise<bigint | void> {
          try {
            readContract(config,{
             abi,
@@ -61,9 +61,9 @@ export class ReadContract implements IReadContract {
     }
 
     // check the allowance after the approuve step is completed
-    async _allowance(owner: Hash, spender: Hash): Promise<void> {
+    async _allowance(owner: Hash, spender: Hash): Promise<bigint | void> {
         try {
-            readContract(config,{
+            const a = readContract(config,{
              abi,
              address : contractAddress,
              functionName : "allowance",
@@ -72,6 +72,7 @@ export class ReadContract implements IReadContract {
                 spender
              ]
             })
+            return a;
          } catch (error) {
              let message = "Unknow error";
              if (error instanceof Error) message = error.message;

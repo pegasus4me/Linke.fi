@@ -2,7 +2,8 @@
 import { createConfig, http } from "wagmi";
 import { mainnet, sepolia } from "wagmi/chains";
 import { getDefaultConfig } from "connectkit";
-
+import env from "dotenv"
+env.config
 export const config = createConfig(
   getDefaultConfig({
     // Your dApps chains
@@ -10,7 +11,7 @@ export const config = createConfig(
     transports: {
       // RPC URL for each chain
       [sepolia.id]: http(
-        `https://eth-sepolia.g.alchemy.com/v2/${process.env.API_KEY}`
+        "https://sepolia.infura.io/v3/ee62e7e92a4b4e3cbb0efac6d92b950a"
       ),
       [mainnet.id]: http(),
     },
