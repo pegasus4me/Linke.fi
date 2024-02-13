@@ -3,13 +3,43 @@ import { config } from "@/_libs/config";
 import { abi } from "@/_libs/abi";
 import { Hash } from './types/types';
 import { IWriteContract } from './types/types';
+
+// vault contract 
 const contractAddress: Hash = "0x58Fa02924312CFd1300714daEc48D4f05Ef7f2e1";
+// approuve USDC trading 
+const USDC_TOKEN:Hash = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
 
 
 
 export class WriteContract implements IWriteContract {
-    // # apporouve contract spender 
+    
+    // # apporouve contract spender == approuve the USDC contract 
     async approuve(assets :bigint, spender : Hash, Current_balance : bigint) : Promise<void> {
+        try {
+        
+            // checkpoint pour s'assurer que l'user n'essaye pas de stake plus que ça currentBalance
+            if(assets > Current_balance) {
+            throw new Error("you cant stake more than your balance")
+            }
+            
+            writeContract(config,{
+                    abi,
+                    address : USDC_TOKEN,
+                    functionName : "approve",
+                    args : [
+                        spender,
+                        assets,
+                    ]
+            })
+        } catch (error) {
+            let message = "Unknow error";
+            if (error instanceof Error) message = error.message;
+            throw new Error(message);
+        }
+    }
+
+     // # apporouve contract spender == approuve the USDC contract 
+     async approuveShares(assets :bigint, spender : Hash, Current_balance : bigint) : Promise<void> {
         try {
         
             // checkpoint pour s'assurer que l'user n'essaye pas de stake plus que ça currentBalance
@@ -78,7 +108,13 @@ export class WriteContract implements IWriteContract {
         }
     }
     // # redeem underlined asset from the contract to the caller exchange burn their shares and sent it their asset
-    async redeem(shares: bigint, receiver:Hash , owner:Hash ): Promise<number | void> {
+    async redeem(shares: bigint, receiver:Hash , owner:Hash, Current_balance: bigint): Promise<number | void> {
+        
+        // checkpoint pour s'assurer que l'user n'essaye pas de stake plus que ça currentBalance
+        if(shares > Current_balance) {
+            throw new Error("you cant stake more than your balance")
+            }
+        
         try {
             writeContract(config,{
                     abi,

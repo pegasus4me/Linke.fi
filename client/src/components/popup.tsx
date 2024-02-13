@@ -22,10 +22,10 @@ import { checker } from "@/lib/utils";
 import { WriteContract } from "@/methods/writeContract";
 import { ReadContract } from "@/methods/readContract";
 import { useBalance } from 'wagmi'
-
+// import { parseEther } from 'viem'
+import { parseUnits } from 'viem'
 // ///////////////////////////////
 const contract_address:Hash ="0x58Fa02924312CFd1300714daEc48D4f05Ef7f2e1"
-const VUSDC:Hash  = "0x58Fa02924312CFd1300714daEc48D4f05Ef7f2e1"
 const USDC_TOKEN:Hash = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
 
  export default function InitiateTransaction({name, allowance, tvl, ratio} : ITransaction) : JSX.Element {
@@ -41,20 +41,25 @@ const USDC_TOKEN:Hash = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
   })
   // verifie si l'allowance est superieure au montant entrée par l'user
   async function allowanceCheker(){
-    const TAllowance = await _allowance(account.address as `0x${string}`, contract_address as `0x${string}`)
-    const verify =  checker(parseFloat(amount),Number(TAllowance));
-    setVerify(verify)
+    if(account.address !== undefined) {
+      const TAllowance = await _allowance(account.address as `0x${string}`, contract_address as `0x${string}`)
+      console.log("dodDoddddd", TAllowance)
+      const verify =  checker(parseFloat(amount),Number(TAllowance));
+      setVerify(verify)
+    } else {
+      return 
+    }
+    
   }
 
   useEffect(()=> {
     allowanceCheker()
   },[amount])
 
-
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="bg-[#2730F7] text-white font-light py-3 px-8 hover:bg-[#2730A7] hover:bg-[#747AFF]">Stake {name}</button>
+        <button className="bg-[#2730F7] mt-4 text-white font-light py-3 px-8 hover:bg-[#2730A7] hover:bg-[#747AFF]">Stake {name}</button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -87,11 +92,11 @@ const USDC_TOKEN:Hash = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
         {
             verify  ? (
               <button className="bg-[#2730F7] text-white font-light py-3 px-8 hover:bg-[#2730A7] hover:bg-[#747AFF]"
-              onClick={()=> deposit(BigInt(amount), account.address as `0x${string}`, usdcBalance.data?.value as bigint)}
+              onClick={()=> deposit(parseUnits(amount, 6), account.address as `0x${string}`, parseUnits(usdcBalance.data?.formatted as string, 6))}
               >deposit</button>
             ) : (
               <button className="bg-[#2730F7] text-white font-light py-3 px-8 hover:bg-[#2730A7] hover:bg-[#747AFF]"
-              onClick={() => approuve(BigInt(amount), contract_address, usdcBalance.data?.value as bigint )}
+              onClick={() => approuve(parseUnits(amount, 6), contract_address, parseUnits(usdcBalance.data?.formatted as string, 6))}
               >approuve</button>
             )
         }

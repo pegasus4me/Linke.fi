@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Noto_Sans_Mono } from "next/font/google";
 import "./globals.css";
 import Query from "@/wrappers/query";
 import Provider from "@/wrappers/wagmiProvider";
 import Header from "@/components/header";
-const inter = Inter({ subsets: ["latin"] });
+const noto = Noto_Sans_Mono({ subsets: ["latin"]});
 
 export const metadata: Metadata = {
   title: "Linke.fi",
@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={noto.className}>
         <Provider>
           <Query>  
             <Header/>
