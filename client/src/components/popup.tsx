@@ -28,7 +28,7 @@ import { parseUnits } from 'viem'
 const contract_address:Hash ="0x58Fa02924312CFd1300714daEc48D4f05Ef7f2e1"
 const USDC_TOKEN:Hash = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
 
- export default function InitiateTransaction({name, allowance, tvl, ratio} : ITransaction) : JSX.Element {
+ export default function InitiateTransaction({name, tvl} : ITransaction) : JSX.Element {
 
   const [amount, setAmount] = useState<string>("0")
   const [verify, setVerify] = useState<boolean>(false)

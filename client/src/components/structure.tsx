@@ -42,7 +42,7 @@ export default function Structure({
           </div>
       <div className="p-3">
         {staked !== undefined ? <p className="font-medium text-sm">staked <span className="font-light">{staked} usdc </span></p> : <Skeleton className="w-[100px] h-[20px] rounded-sm" />}
-        {vShares !== undefined ? <p className="font-medium text-sm">shares  <span className="font-light">{vShares} usdc </span></p> : <Skeleton className="w-[100px] h-[20px] rounded-sm" />}
+        {vShares !== undefined ? <p className="font-medium text-sm">shares  <span className="font-light">{vShares} vSUsdc </span></p> : <Skeleton className="w-[100px] h-[20px] rounded-sm" />}
 
         <Reedem vShares={vShares}/>
       </div>

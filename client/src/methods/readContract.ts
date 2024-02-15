@@ -13,7 +13,7 @@ export class ReadContract implements IReadContract {
 
 
 
-    async _entryFee(): Promise<number | void> {
+    async _entryFee(): Promise<bigint | void> {
         try {
            readContract(config,{
             abi,
@@ -102,13 +102,14 @@ export class ReadContract implements IReadContract {
     }
 
 
-    async _tvl(): Promise<number | void> {
+    async _tvl(): Promise<bigint | void> {
          try {
-           readContract(config,{
+           const tvl  = readContract(config,{
             abi,
             address : contractAddress,
             functionName : "totalAssets",
            })
+           return tvl
 
         } catch (error) {
             let message = "Unknow error";

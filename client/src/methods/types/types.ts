@@ -2,12 +2,12 @@
 export type Hash = `0x${string}`;
 
 export interface IReadContract {
-    _entryFee() : Promise<number | void>
+    _entryFee() : Promise<bigint | void>
     _previewDeposit(assets:  bigint) : Promise<bigint | void>
     _previewWithdraw(shares : bigint) : Promise<bigint | void>
     _allowance(owner : Hash , spender : Hash) : Promise<bigint | void>
     _allowanceShares(owner: Hash, spender: Hash): Promise<bigint | void>
-    _tvl() : Promise<number | void>
+    _tvl() : Promise<bigint | void>
     _underlinedToken() : Promise<Hash | void>
   
 }
