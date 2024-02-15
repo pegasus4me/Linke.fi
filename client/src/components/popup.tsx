@@ -11,11 +11,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { ITransaction } from "@/methods/types/types";
-import { useReadContract } from "wagmi";
 import { Hash } from "viem";
-import {abi} from "@/_libs/abi"
 import {config} from "@/_libs/config"
 import { useAccount } from "wagmi";
 import { checker } from "@/lib/utils";

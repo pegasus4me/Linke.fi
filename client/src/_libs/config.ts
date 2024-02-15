@@ -11,13 +11,13 @@ export const config = createConfig(
     transports: {
       // RPC URL for each chain
       [sepolia.id]: http(
-        "https://sepolia.infura.io/v3/ee62e7e92a4b4e3cbb0efac6d92b950a"
+        `${process.env.NEXT_PUBLIC_INFURA_RPC}`
       ),
       [mainnet.id]: http(),
     },
 
     // Required API Keys
-    walletConnectProjectId: "3aeb9c91b76920c2c9d58e9afd364758" as string,
+    walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID as string,
 
     // Required App Info
     appName: "Linke.fi",

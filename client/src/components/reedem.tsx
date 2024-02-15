@@ -2,16 +2,13 @@
 import { useState, useEffect } from "react";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { WriteContract } from "@/methods/writeContract";
 import { ReadContract } from "@/methods/readContract";
 import {Hash} from "@/methods/types/types"
@@ -19,10 +16,8 @@ import { useAccount } from "wagmi";
 import { config } from "@/_libs/config";
 import { checker } from "@/lib/utils";
 import { parseUnits } from "viem";
-import { useReadContract } from "wagmi";
-import {abi} from "@/_libs/abi"
+
 const contract_address:Hash ="0x58Fa02924312CFd1300714daEc48D4f05Ef7f2e1"
-const USDC_TOKEN:Hash = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
 
 
 export default function Reedem({ vShares }: { vShares: string | undefined }) {
