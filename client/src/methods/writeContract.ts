@@ -112,7 +112,7 @@ export class WriteContract implements IWriteContract {
         
         // checkpoint pour s'assurer que l'user n'essaye pas de stake plus que ça currentBalance
         if(shares > Current_balance) {
-            throw new Error("you cant stake more than your balance")
+            throw new Error("you cant reedem more than your balance")
             }
         
         try {

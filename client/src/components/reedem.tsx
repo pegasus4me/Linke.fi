@@ -19,7 +19,8 @@ import { useAccount } from "wagmi";
 import { config } from "@/_libs/config";
 import { checker } from "@/lib/utils";
 import { parseUnits } from "viem";
-
+import { useReadContract } from "wagmi";
+import {abi} from "@/_libs/abi"
 const contract_address:Hash ="0x58Fa02924312CFd1300714daEc48D4f05Ef7f2e1"
 const USDC_TOKEN:Hash = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
 
@@ -34,7 +35,6 @@ export default function Reedem({ vShares }: { vShares: string | undefined }) {
     async function checkAllowance () {
         if(account.address !== undefined) {
             const shareAllowance = await _allowanceShares(account.address as `0x${string}`, contract_address )
-            console.log("cococ", shareAllowance)
             const verifyAllowance = checker(Number(shares), Number(shareAllowance))
             setVerify(verifyAllowance)
         } else {
@@ -42,7 +42,6 @@ export default function Reedem({ vShares }: { vShares: string | undefined }) {
         }
  
     }
-    
     useEffect(()=> {
         checkAllowance()
       },[shares])
@@ -77,7 +76,7 @@ export default function Reedem({ vShares }: { vShares: string | undefined }) {
           {
             verify  ? (
               <button className="bg-[#2730F7] text-white font-light py-3 px-8 hover:bg-[#2730A7] hover:bg-[#747AFF]"
-              onClick={()=> redeem(parseUnits(shares as string, 6), account.address as `0x${string}`, contract_address,  parseUnits(vShares as string , 6)) }
+              onClick={()=> redeem(parseUnits(shares as string, 6), account.address as `0x${string}`, account.address as `0x${string}` ,  parseUnits(vShares as string , 6)) }
               >reedem usdc</button>
             ) : (
               <button className="bg-[#2730F7] text-white font-light py-3 px-8 hover:bg-[#2730A7] hover:bg-[#747AFF]"
@@ -91,3 +90,4 @@ export default function Reedem({ vShares }: { vShares: string | undefined }) {
     </Dialog>
   );
 }
+

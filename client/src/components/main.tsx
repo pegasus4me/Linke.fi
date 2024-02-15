@@ -32,6 +32,12 @@ export default function Main() {
         token : USDC_TOKEN
     })
 
+    async function TVL() {
+    const tvl = await _tvl()
+    console.log("igo",tvl)
+}
+TVL()
+    
     return (
         <>
          

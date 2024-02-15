@@ -43,7 +43,6 @@ const USDC_TOKEN:Hash = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
   async function allowanceCheker(){
     if(account.address !== undefined) {
       const TAllowance = await _allowance(account.address as `0x${string}`, contract_address as `0x${string}`)
-      console.log("dodDoddddd", TAllowance)
       const verify =  checker(parseFloat(amount),Number(TAllowance));
       setVerify(verify)
     } else {
